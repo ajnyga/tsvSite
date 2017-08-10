@@ -77,9 +77,7 @@
 					
 						
 					</div>
-					
-					{/if}
-					
+										
 				{/iterate}
 			</div>
 	</div>
