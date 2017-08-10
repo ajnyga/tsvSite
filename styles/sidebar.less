@@ -1,0 +1,78 @@
+/**
+ * @file plugins/themes/tsvSite/styles/sidebar.less
+ *
+ * Copyright (c) 2014-2016 Simon Fraser University Library
+ * Copyright (c) 2003-2016 John Willinsky
+ * Distributed under the GNU GPL v2. For full terms see the file docs/COPYING.
+ *
+ * @brief Styles for the sidebar blocks
+ *
+ */
+
+.pkp_block {
+	padding: @triple @double;
+	clear: both;
+	font-size: @font-base;
+	line-height: @line-base;
+	color: @text-grey;
+	border-bottom: 1px solid @bg-shade;
+
+	.title {
+		display: block;
+		margin-bottom: @base;
+		font-family: @font-heading;
+		text-transform: uppercase;
+		font-size: @font-smlbase;
+		font-weight: @bold;
+		line-height: @line-bump;
+		color: @text;
+		letter-spacing: 2px;
+	}
+
+	.content {
+
+		 ul {
+			&:extend(.pkp_unstyled_list);
+
+			li {
+				line-height: @line-base;
+				padding: @half 0;
+			}
+		}
+
+		p {
+			line-height: @line-base-large;
+
+			&:first-child {
+				margin-top: 0;
+			}
+
+			&:last-child {
+				margin-bottom: 0;
+			}
+		}
+	}
+
+	a {
+		text-decoration: none;
+	}
+
+	@media(min-width: @screen-desktop) {
+		padding: @triple;
+	}
+}
+
+.block_information,
+.block_language_toggle {
+
+	a {
+		font-size: @font-sml;
+	}
+}
+
+.block_make_submission {
+
+	a {
+		&:extend(.cmp_button);
+	}
+}

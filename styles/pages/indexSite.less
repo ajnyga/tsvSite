@@ -1,0 +1,321 @@
+/**
+ * @file  plugins/themes/tsvSite/styles/pages/indexJournal.less
+ *
+ * Copyright (c) 2014-2016 Simon Fraser University Library
+ * Copyright (c) 2003-2016 John Willinsky
+ * Distributed under the GNU GPL v2. For full terms see the file docs/COPYING.
+ *
+ * @brief Styles applying to the front page of the journal
+ * @link templates/frontend/pages/indexJournal.tpl
+ */
+ 
+@cover-width: 160px;
+@cover-height: @cover-width * 1.4142;
+@thumb-width: 160px;
+@thumb-height: @thumb-width * 1.4142; 
+ 
+ 
+.tsv_search{
+	.pkp_helpers_clear;
+	width: 365px;
+	margin: @triple auto 0 auto;
+
+	input{
+	
+		width: 300px;
+		height: 60px;
+		padding: 10px;
+		margin: 1px 0 0 0;
+		font-size: @font-bump;
+		font-weight: @bold;
+		color: @text-bg-base;
+		border: 3px solid @text-bg-base;
+		background: transparent;
+	}
+	
+	button{
+		background: @text-bg-base;
+		width: 60px;
+		height: 60px;
+		padding: 10px;		
+		color: @text-dark;
+		border: 0;
+		margin: 0;
+		border: 3px solid @text-bg-base;		
+		font-size: @font-bump;
+		
+		&:hover{
+			color: @primary;
+		}
+		
+	}
+
+} 
+ 
+ 
+.pkp_page_index {
+
+
+	h2{
+		text-align: center;
+		display: block;
+		font-size: @font-lead;
+		margin-top: 100px;	
+	}
+
+	.tsv_issues{
+		.pkp_helpers_clear;
+		margin: 30px auto 100px auto;
+
+		
+		@media( min-width: @screen-phone ) {
+			width: 380px;
+			@cover-width: 180px;
+		}
+		
+		@media( min-width: @screen-tablet ) {
+			width: 540px;
+			@cover-width: 160px;
+		}
+
+		@media( min-width: @screen-desktop ) {
+			width: 560px;
+			@cover-width: 170px;
+		}
+
+		@media( min-width: @screen-lg-desktop ) {
+			width: 90%;
+			@cover-width: 160px;
+		}		
+		
+	
+		.tsv_issue{
+			margin: @double @half 0 @half;
+			width: @cover-width;
+			height: @cover-height+130px;
+			overflow: hidden;
+			display: inline-block;
+
+		
+			.tsv_issue_cover{			
+				width: @cover-width;
+				height: @cover-height;
+				background-repeat: no-repeat;
+				background-position: center; 
+			}
+			
+			.tsv_issue_title{
+				margin: @half;
+				font-weight: @bold;
+				font-size: @font-base;
+				line-height: @line-bump;
+				text-align: center;	
+				  overflow-wrap: break-word;
+				  word-wrap: break-word;
+				  -webkit-hyphens: auto;
+				  -ms-hyphens: auto;
+				  -moz-hyphens: auto;
+				  hyphens: auto;
+			}
+			.tsv_issue_issue{
+				margin: @half;
+				font-size: @font-sml;
+				line-height: @line-base;
+				text-align: center;
+				text-transform: uppercase;
+				color: @text-grey;
+			}
+			
+			a{
+					color: @text-dark;
+			}
+			
+			
+		}
+	
+	
+	
+	
+	}
+
+	.tsv_info{
+		width: 100%;
+		display: block;
+		
+		.tsv_info_box{
+			display: block;
+			width: 100%;
+			margin-top: @base;
+			padding: @triple;
+			background: rgb(245,244,243);
+			background: -moz-linear-gradient(left, rgba(245,244,243,1) 0%, rgba(219,216,215,1) 100%);
+			background: -webkit-linear-gradient(left, rgba(245,244,243,1) 0%,rgba(219,216,215,1) 100%);
+			background: linear-gradient(to right, rgba(245,244,243,1) 0%,rgba(219,216,215,1) 100%);
+			filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f5f4f3', endColorstr='#dbd8d7', GradientType=1 );
+			
+			p{
+				font-size: @font-bump;
+				color: @text-dark;
+			}
+			
+			
+			@media( min-width: @screen-tablet ) {
+				margin: 0;
+				display: table-cell;
+				width: 50%;
+			}
+			
+			h2{
+				margin-top: 0;	
+			}			
+			
+		}
+		
+		@media( min-width: @screen-tablet ) {
+			display: table;
+		}						
+		
+	}
+	
+	.tsv_most_read{
+		list-style-type: none;
+		margin: 0;
+		padding: 0;
+		
+		.tsv_most_read_article{
+			margin-bottom: @base;
+			
+			.tsv_most_read_article_title{
+				font-size: @font-base;
+				line-height: @line-base;
+				font-weight: @bold;
+			
+			}
+			
+			.tsv_most_read_article_journal{
+				font-size: @font-sml;
+				text-transform: uppercase;
+				color: @text-dark;
+				letter-spacing: 2px;
+			
+			}
+			
+		
+		}
+	
+	
+	
+	}
+	
+	.tsv_journals{
+		.pkp_helpers_clear;
+		margin: 30px auto 100px auto;
+	
+		@media( min-width: @screen-phone ) {
+			width: 380px;
+			@cover-width: 180px;
+		}
+		
+		@media( min-width: @screen-tablet ) {
+			width: 540px;
+			@cover-width: 160px;
+		}
+
+		@media( min-width: @screen-desktop ) {
+			width: 560px;
+			@cover-width: 170px;
+		}
+
+		@media( min-width: @screen-lg-desktop ) {
+			width: 90%;
+			@cover-width: 160px;
+		}		
+	
+		.tsv_thumb{
+			margin: @triple @half 0 @half;
+			width: @thumb-width;
+			height: @thumb-height+120px;
+			overflow: hidden;
+			display: inline-block;
+					
+				.tsv_thumb_journal{			
+					width: @thumb-width;
+					height: @thumb-height;
+					background-repeat: no-repeat;
+					background-position: center; 
+					background-size: contain;
+				}
+				.tsv_thumb_default{
+					width: @thumb-width;
+					height: @thumb-height;
+					background-repeat: no-repeat;
+					background-position: center;
+				}
+				.tsv_thumb_title{
+					margin: @half;
+					font-weight: @bold;
+					font-size: @font-base;
+					line-height: @line-bump;
+					text-align: center;
+					overflow-wrap: break-word;
+					word-wrap: break-word;
+					-webkit-hyphens: auto;
+					-ms-hyphens: auto;
+					-moz-hyphens: auto;
+					hyphens: auto;	
+						
+					a{
+						color: @text-dark;
+					}
+				}
+			
+			
+			
+		
+		}
+		
+	
+	
+	}
+	
+	
+	
+}
+
+/* Float */
+.hvr-float {
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-transform: perspective(1px) translateZ(0);
+  transform: perspective(1px) translateZ(0);
+  box-shadow: 0 0 1px transparent;
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  -webkit-transition-property: transform;
+  transition-property: transform;
+  -webkit-transition-timing-function: ease-out;
+  transition-timing-function: ease-out;
+}
+.hvr-float:hover, .hvr-float:focus, .hvr-float:active {
+  -webkit-transform: translateY(-8px);
+  transform: translateY(-8px);
+}
+
+/* Sink */
+.hvr-sink {
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-transform: perspective(1px) translateZ(0);
+  transform: perspective(1px) translateZ(0);
+  box-shadow: 0 0 1px transparent;
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  -webkit-transition-property: transform;
+  transition-property: transform;
+  -webkit-transition-timing-function: ease-out;
+  transition-timing-function: ease-out;
+}
+.hvr-sink:hover, .hvr-sink:focus, .hvr-sink:active {
+  -webkit-transform: translateY(8px);
+  transform: translateY(8px);
+}
