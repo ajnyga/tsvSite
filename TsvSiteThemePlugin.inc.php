@@ -32,7 +32,7 @@ class TsvSiteThemePlugin extends ThemePlugin {
 	 */
 	public function init() {
 
-		// Load language selection
+		// Load additional template data
 		HookRegistry::register ('TemplateManager::display', array($this, 'loadTemplateData'));
 
 		// Load primary stylesheet
