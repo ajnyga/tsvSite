@@ -32,6 +32,8 @@
 		<a href="#pkp_content_footer">{translate key="navigation.skip.footer"}</a>
 	</div>
 	<div class="pkp_structure_page">
+	
+	<!-- Tämä on parent -->
 
 		{* Header *}
 		<header class="pkp_structure_head" id="headerNavigationContainer" role="banner">				
@@ -102,12 +104,17 @@
 						{/foreach}
 						</li>
 						{/if}
-						
-						
-						
+
+						<li>
+							<a href="http://journal.fi/index/user/setLocale/en_US?source=%2Findex%2Findex">en</a>
+							<a href="http://journal.fi/index/user/setLocale/fi_FI?source=%2Findex%2Findex">fi</a>
+							<a href="http://journal.fi/index/user/setLocale/sv_SE?source=%2Findex%2Findex">sv</a>
+						</li>
 					</ul>
 				</nav><!-- .pkp_navigation_user_wrapper -->			
 			
+			
+				{* Lehden nimi ja logo *}
 				<div class="pkp_site_name_wrapper">
 		
 				
@@ -144,7 +151,7 @@
 		<div class="pkp_structure_content">
 		
 			<div id="pkp_content_main" class="pkp_structure_main" role="main">
-			
+
 			
 			
 			

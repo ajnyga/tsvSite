@@ -56,12 +56,16 @@
 	
 	<h2>{translate key="journal.journals"}</h2>
 
+
 	<div class="tsv_journals">
 			<div class="grid">
 				{iterate from=journals item=journal}
 					
+					{if !in_array($journal->getId(), $hideJournals)}
+					
 					{capture assign="url"}{url journal=$journal->getPath()}{/capture}
-					{assign var="thumb" value=$journal->getLocalizedSetting('journalThumbnail')}
+					{assign var="journalLocale" value=$journal->getPrimaryLocale()}
+					{assign var="thumb" value=$journal->getSetting('journalThumbnail', $journalLocale)}
 					
 					<div class="tsv_thumb hvr-float">
 						
@@ -77,7 +81,9 @@
 					
 						
 					</div>
-										
+					
+					{/if}
+					
 				{/iterate}
 			</div>
 	</div>

@@ -32,7 +32,7 @@ class TsvSiteThemePlugin extends ThemePlugin {
 	 */
 	public function init() {
 
-		// Load additional template data
+		// Load language selection
 		HookRegistry::register ('TemplateManager::display', array($this, 'loadTemplateData'));
 
 		// Load primary stylesheet
@@ -55,7 +55,17 @@ class TsvSiteThemePlugin extends ThemePlugin {
 			$this->modifyStyle('stylesheet', array('addLessVariables' => join($additionalLessVariables)));
 		}		
 		
-		
+		// Load icon font FontAwesome - http://fontawesome.io/
+		if (Config::getVar('general', 'enable_cdn')) {
+			$url = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css';
+		} else {
+			$url = $request->getBaseUrl() . '/lib/pkp/styles/fontawesome/fontawesome.css';
+		}
+		$this->addStyle(
+			'fontAwesome',
+			$url,
+			array('baseUrl' => '')
+		);		
 
 		// Load jQuery from a CDN or, if CDNs are disabled, from a local copy.
 		$min = Config::getVar('general', 'enable_minified') ? '.min' : '';
@@ -110,6 +120,16 @@ class TsvSiteThemePlugin extends ThemePlugin {
 		$issueDao = DAORegistry::getDAO('IssueDAO');
 		$journalDao = DAORegistry::getDAO('JournalDAO');
 		
+		
+		// Luettelosta piilotettavat lehdet
+		$hideJournals = array(82, 57, 46, 83, 58, 44, 73);
+		
+		// Hausta piilotettavat lehdet
+		$hideFromSearch = array(53, 45, 57, 72, 73, 74, 75, 78, 79, 82, 83, 51, 44);
+		
+		$templateMgr->assign('hideJournals', $hideJournals);
+		$templateMgr->assign('hideFromSearch', $hideFromSearch);
+		
 		// Start Language selector
 		$templateMgr->assign('isPostRequest', $request->isPost());	
 		
@@ -135,7 +155,7 @@ class TsvSiteThemePlugin extends ThemePlugin {
 		$volLabel = __('issue.vol');
 		$numLabel = __('issue.no');
 		
-		$result = $issueDao->retrieve("SELECT issue_id FROM issues WHERE published = '1' AND access_status= '1' AND year != '0' ORDER BY date_published DESC LIMIT 6");
+		$result = $issueDao->retrieve("SELECT issue_id FROM issues WHERE published = '1' AND access_status= '1' AND year != '0' AND journal_id NOT IN (53, 42, 45, 57, 71, 72, 73, 74, 75, 76, 78, 79, 82, 83, 51, 58, 44, 90, 91, 92, 94, 95, 96, 97, 67, 113) ORDER BY date_published DESC LIMIT 6");
 		
 		while (!$result->EOF) {
 			$resultRow = $result->GetRowAssoc(false);
@@ -154,10 +174,12 @@ class TsvSiteThemePlugin extends ThemePlugin {
 				$issueList[$issueId]['cover'] =  $issue->getLocalizedCoverImageUrl();
 				$issueList[$issueId]['contain'] =  true;
 			}	
+			# Tähän listauskannen haku toiseksi vaihtoehdoksi, vasta sen jälkeen haetaan tuo viimeinen vaihtoehto
 			else{
 				$issueList[$issueId]['cover'] =  $request->getBaseUrl()."/plugins/themes/tsvSite/images/journalfi_default_cover.png";
 			}
-						
+			
+			
 			$issueList[$issueId]['path'] =  $issue->getBestIssueId();
 			
 			$volume = $issue->getVolume();
@@ -170,9 +192,10 @@ class TsvSiteThemePlugin extends ThemePlugin {
 			if ($volume != "0") $issueIdentification = $volLabel." ".$volume." ".$issueIdentification;		
 			
 			$issueList[$issueId]['identification'] =  $issueIdentification;
-				
+			
+			
+			
 		}
-		
 		$templateMgr->assign('issueList', $issueList);
 		
 		// End Latest issues
@@ -206,7 +229,7 @@ class TsvSiteThemePlugin extends ThemePlugin {
 		
 
 	}
-	
+
 	function _cacheMiss($cache) {
 			$metricsDao = DAORegistry::getDAO('MetricsDAO');
 			$publishedArticleDao = DAORegistry::getDAO('PublishedArticleDAO');
@@ -216,7 +239,7 @@ class TsvSiteThemePlugin extends ThemePlugin {
 			
 			while (!$result->EOF) {
 				$resultRow = $result->GetRowAssoc(false);
-				$article = $publishedArticleDao->getPublishedArticleByArticleId($resultRow['submission_id']);	
+				$article = $publishedArticleDao->getById($resultRow['submission_id']);	
 				$journal = $journalDao->getById($article->getJournalId());
 				$articles[$resultRow['submission_id']]['journalPath'] = $journal->getPath();
 				$articles[$resultRow['submission_id']]['journalName'] = $journal->getLocalizedName();
@@ -230,7 +253,10 @@ class TsvSiteThemePlugin extends ThemePlugin {
 			$cache->setEntireCache($articles);
 			return $result;
 	}
-
+	
+	
+	
+	
 	
 }
 
