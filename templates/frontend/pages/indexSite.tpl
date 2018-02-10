@@ -60,9 +60,7 @@
 	<div class="tsv_journals">
 			<div class="grid">
 				{iterate from=journals item=journal}
-					
-					{if !in_array($journal->getId(), $hideJournals)}
-					
+										
 					{capture assign="url"}{url journal=$journal->getPath()}{/capture}
 					{assign var="journalLocale" value=$journal->getPrimaryLocale()}
 					{assign var="thumb" value=$journal->getSetting('journalThumbnail', $journalLocale)}
@@ -81,9 +79,7 @@
 					
 						
 					</div>
-					
-					{/if}
-					
+										
 				{/iterate}
 			</div>
 	</div>

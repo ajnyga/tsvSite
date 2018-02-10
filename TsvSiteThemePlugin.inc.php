@@ -119,17 +119,7 @@ class TsvSiteThemePlugin extends ThemePlugin {
         $site = $request->getSite();
 		$issueDao = DAORegistry::getDAO('IssueDAO');
 		$journalDao = DAORegistry::getDAO('JournalDAO');
-		
-		
-		// Luettelosta piilotettavat lehdet
-		$hideJournals = array(82, 57, 46, 83, 58, 44, 73);
-		
-		// Hausta piilotettavat lehdet
-		$hideFromSearch = array(53, 45, 57, 72, 73, 74, 75, 78, 79, 82, 83, 51, 44);
-		
-		$templateMgr->assign('hideJournals', $hideJournals);
-		$templateMgr->assign('hideFromSearch', $hideFromSearch);
-		
+				
 		// Start Language selector
 		$templateMgr->assign('isPostRequest', $request->isPost());	
 		
@@ -155,7 +145,7 @@ class TsvSiteThemePlugin extends ThemePlugin {
 		$volLabel = __('issue.vol');
 		$numLabel = __('issue.no');
 		
-		$result = $issueDao->retrieve("SELECT issue_id FROM issues WHERE published = '1' AND access_status= '1' AND year != '0' AND journal_id NOT IN (53, 42, 45, 57, 71, 72, 73, 74, 75, 76, 78, 79, 82, 83, 51, 58, 44, 90, 91, 92, 94, 95, 96, 97, 67, 113) ORDER BY date_published DESC LIMIT 6");
+		$result = $issueDao->retrieve("SELECT issue_id FROM issues WHERE published = '1' AND access_status= '1' AND year != '0' ORDER BY date_published DESC LIMIT 6");
 		
 		while (!$result->EOF) {
 			$resultRow = $result->GetRowAssoc(false);
@@ -174,7 +164,6 @@ class TsvSiteThemePlugin extends ThemePlugin {
 				$issueList[$issueId]['cover'] =  $issue->getLocalizedCoverImageUrl();
 				$issueList[$issueId]['contain'] =  true;
 			}	
-			# Tähän listauskannen haku toiseksi vaihtoehdoksi, vasta sen jälkeen haetaan tuo viimeinen vaihtoehto
 			else{
 				$issueList[$issueId]['cover'] =  $request->getBaseUrl()."/plugins/themes/tsvSite/images/journalfi_default_cover.png";
 			}

@@ -24,9 +24,7 @@
 	<div class="search_results">
 		
 		{iterate from=results item=result}
-			{if !in_array($result.journal->getId(), $hideFromSearch)}
-				{include file="frontend/objects/article_summary.tpl" article=$result.publishedArticle journal=$result.journal showDatePublished=false}
-			{/if}
+			{include file="frontend/objects/article_summary.tpl" article=$result.publishedArticle journal=$result.journal showDatePublished=false}
 		{/iterate}
 	</div>
 
