@@ -223,8 +223,11 @@ class TsvSiteThemePlugin extends ThemePlugin {
 			$metricsDao = DAORegistry::getDAO('MetricsDAO');
 			$publishedArticleDao = DAORegistry::getDAO('PublishedArticleDAO');
 			$journalDao = DAORegistry::getDAO('JournalDAO');
+		
+			$currentDate = date('Ymd');
+			$weekAgo = date('Ymd', strtotime("-1 week"));
 			
-			$result = $metricsDao->retrieve("SELECT submission_id, SUM(metric) AS metric FROM metrics WHERE (day BETWEEN CURDATE()-INTERVAL 1 WEEK AND CURDATE()) AND (assoc_type='515' AND submission_id IS NOT NULL) GROUP BY submission_id ORDER BY metric DESC LIMIT 5");
+			$result = $metricsDao->retrieve("SELECT submission_id, SUM(metric) AS metric FROM metrics WHERE (day BETWEEN $currentDate AND $weekAgo) AND (assoc_type='515' AND submission_id IS NOT NULL) GROUP BY submission_id ORDER BY metric DESC LIMIT 5");
 			
 			while (!$result->EOF) {
 				$resultRow = $result->GetRowAssoc(false);
