@@ -35,7 +35,6 @@
 		
 		<div class="tsv_info_box">
 			<h2>{translate|escape key="plugins.themes.tsvSite.mostRead"}</h2>
-			
 			<ul class="tsv_most_read">
 			{foreach from=$resultMetrics item=article}
 				<li class="tsv_most_read_article">
@@ -79,7 +78,9 @@
 					
 						
 					</div>
-										
+					
+					{/if}
+					
 				{/iterate}
 			</div>
 	</div>

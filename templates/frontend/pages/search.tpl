@@ -24,7 +24,7 @@
 	<div class="search_results">
 		
 		{iterate from=results item=result}
-			{include file="frontend/objects/article_summary.tpl" article=$result.publishedArticle journal=$result.journal showDatePublished=false}
+				{include file="frontend/objects/article_summary.tpl" article=$result.publishedArticle journal=$result.journal showDatePublished=false}
 		{/iterate}
 	</div>
 

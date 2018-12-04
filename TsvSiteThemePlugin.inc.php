@@ -1,10 +1,10 @@
 <?php
 
 /**
- * @file plugins/themes/tsvSite/DefaultThemePlugin.inc.php
+ * @file plugins/themes/tsvSite/TsvSiteThemePlugin.inc.php
  *
- * Copyright (c) 2014-2016 Simon Fraser University Library
- * Copyright (c) 2003-2016 John Willinsky
+ * Copyright (c) 2014-2018 Simon Fraser University Library
+ * Copyright (c) 2003-2018 John Willinsky
  * Distributed under the GNU GPL v2. For full terms see the file docs/COPYING.
  *
  * @class TsvSiteThemePlugin
@@ -119,7 +119,8 @@ class TsvSiteThemePlugin extends ThemePlugin {
         $site = $request->getSite();
 		$issueDao = DAORegistry::getDAO('IssueDAO');
 		$journalDao = DAORegistry::getDAO('JournalDAO');
-				
+		
+		
 		// Start Language selector
 		$templateMgr->assign('isPostRequest', $request->isPost());	
 		
@@ -130,14 +131,11 @@ class TsvSiteThemePlugin extends ThemePlugin {
 			$templateMgr->assign('languageToggleNoUser', true);
 		}
 		if (isset($locales) && count($locales) > 1) {
-			$templateMgr->assign('enableLanguageToggle', false);
+			$templateMgr->assign('enableLanguageToggle', true);
 			$templateMgr->assign('languageToggleLocales', $locales);
-			
-			
 		}
 		// End Language selector
 
-		
 		
 		// Start Latest issues
 		$issues = array();
@@ -181,9 +179,6 @@ class TsvSiteThemePlugin extends ThemePlugin {
 			if ($volume != "0") $issueIdentification = $volLabel." ".$volume." ".$issueIdentification;		
 			
 			$issueList[$issueId]['identification'] =  $issueIdentification;
-			
-			
-			
 		}
 		$templateMgr->assign('issueList', $issueList);
 		
@@ -193,7 +188,7 @@ class TsvSiteThemePlugin extends ThemePlugin {
 		// Start Most read
 		$metricsDao = DAORegistry::getDAO('MetricsDAO');
 		$cacheManager =& CacheManager::getManager();
-		$cache  =& $cacheManager->getCache('mostread', 0, array($this, '_cacheMiss'));
+		$cache  =& $cacheManager->getCache('mostreadsite', 0, array($this, '_cacheMiss'));
 
 		$daysToStale = 1;
 		$cachedMetrics = false;
@@ -223,7 +218,7 @@ class TsvSiteThemePlugin extends ThemePlugin {
 			$metricsDao = DAORegistry::getDAO('MetricsDAO');
 			$publishedArticleDao = DAORegistry::getDAO('PublishedArticleDAO');
 			$journalDao = DAORegistry::getDAO('JournalDAO');
-		
+			
 			$currentDate = date('Ymd');
 			$weekAgo = date('Ymd', strtotime("-1 week"));
 			

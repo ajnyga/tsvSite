@@ -24,6 +24,7 @@
 {translate|assign:"pageTitleTranslated" key="plugins.themes.tsvSite.title"}
 {include file="frontend/components/headerHead.tpl"}
 
+
 <body class="pkp_page_{$requestedPage|escape|default:"index"} pkp_op_{$requestedOp|escape|default:"index"}{if $showingLogo} has_site_logo{/if}">
 
 	<div class="cmp_skip_to_content">
@@ -89,9 +90,7 @@
 								</ul>
 							</li>
 						{else}
-							{if !$disableUserReg}
-								<li><a href="{url router=$smarty.const.ROUTE_PAGE page="user" op="register"}">{translate key="navigation.register"}</a></li>
-							{/if}
+							
 							<li><a href="{url router=$smarty.const.ROUTE_PAGE page="login"}"><i class="fa fa-sign-out" aria-hidden="true"></i> {translate key="navigation.login"}</a></li>
 						{/if}
 
@@ -104,12 +103,6 @@
 						{/foreach}
 						</li>
 						{/if}
-
-						<li>
-							<a href="http://journal.fi/index/user/setLocale/en_US?source=%2Findex%2Findex">en</a>
-							<a href="http://journal.fi/index/user/setLocale/fi_FI?source=%2Findex%2Findex">fi</a>
-							<a href="http://journal.fi/index/user/setLocale/sv_SE?source=%2Findex%2Findex">sv</a>
-						</li>
 					</ul>
 				</nav><!-- .pkp_navigation_user_wrapper -->			
 			
@@ -128,11 +121,9 @@
 						{/if}
 					</h1>
 
-					<div class="pkp_site_name_small">{translate|escape key="plugins.themes.tsvSite.subTitle"}</div>	
-
+					<div class="pkp_site_name_small">{translate|escape key="plugins.themes.tsvSite.subTitle"}</div>
+					
 				</div>
-
-
 				
 				
 				{include file="frontend/components/searchForm_simple.tpl"}	
